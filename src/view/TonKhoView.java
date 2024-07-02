@@ -253,7 +253,7 @@ public class TonKhoView extends JFrame {
 //    private JTable table;
 //    private JTextArea productListTextArea;
 //    private DefaultTableModel tableModel;
-//    private Map<String, Map<String, Product>> warehouseProducts = new HashMap<>();
+//    private Map<String, Map<String, SanPham>> warehouseProducts = new HashMap<>();
 //    private String selectedProductCode;
 //
 //    public TonKhoView() {
@@ -388,21 +388,21 @@ public class TonKhoView extends JFrame {
 //
 //    public void saveProduct(String warehouseCode, String productCode, String productName, int productQuantity) {
 //        warehouseProducts.putIfAbsent(warehouseCode, new HashMap<>());
-//        Map<String, Product> products = warehouseProducts.get(warehouseCode);
+//        Map<String, SanPham> products = warehouseProducts.get(warehouseCode);
 //        if (products.containsKey(productCode)) {
 //            products.get(productCode).addQuantity(productQuantity);
 //        } else {
-//            products.put(productCode, new Product(productCode, productName, productQuantity));
+//            products.put(productCode, new SanPham(productCode, productName, productQuantity));
 //        }
 //        updateProductList(warehouseCode);
 //    }
 //
 //    private void updateProductList(String warehouseCode) {
-//        Map<String, Product> products = warehouseProducts.get(warehouseCode);
+//        Map<String, SanPham> products = warehouseProducts.get(warehouseCode);
 //        productListTextArea.setText("Sản phẩm cho kho " + warehouseCode + ":\n");
 //        selectedProductCode = null;
 //        if (products != null) {
-//            for (Product product : products.values()) {
+//            for (SanPham product : products.values()) {
 //                productListTextArea.append("Mã: " + product.getCode() + ", Tên: " + product.getName() + ", Số lượng: " + product.getQuantity() + "\n");
 //            }
 //        }
@@ -416,9 +416,9 @@ public class TonKhoView extends JFrame {
 //        int selectedRow = table.getSelectedRow();
 //        if (selectedRow != -1) {
 //            String warehouseCode = (String) table.getValueAt(selectedRow, 0);
-//            Map<String, Product> products = warehouseProducts.get(warehouseCode);
+//            Map<String, SanPham> products = warehouseProducts.get(warehouseCode);
 //            if (products != null && products.containsKey(selectedProductCode)) {
-//                Product product = products.get(selectedProductCode);
+//                SanPham product = products.get(selectedProductCode);
 //                String newProductName = JOptionPane.showInputDialog(this, "Nhập tên mới cho sản phẩm:", product.getName());
 //                String newProductQuantityStr = JOptionPane.showInputDialog(this, "Nhập số lượng mới cho sản phẩm:", product.getQuantity());
 //                try {
@@ -426,7 +426,7 @@ public class TonKhoView extends JFrame {
 //                    product.setName(newProductName);
 //                    product.setQuantity(newProductQuantity);
 //                    updateProductList(warehouseCode);
-//                    System.out.println("Product edited: " + selectedProductCode);
+//                    System.out.println("SanPham edited: " + selectedProductCode);
 //                } catch (NumberFormatException e) {
 //                    JOptionPane.showMessageDialog(this, "Vui lòng nhập số lượng hợp lệ.", "Dữ Liệu Không Hợp Lệ", JOptionPane.ERROR_MESSAGE);
 //                }
@@ -442,11 +442,11 @@ public class TonKhoView extends JFrame {
 //        int selectedRow = table.getSelectedRow();
 //        if (selectedRow != -1) {
 //            String warehouseCode = (String) table.getValueAt(selectedRow, 0);
-//            Map<String, Product> products = warehouseProducts.get(warehouseCode);
+//            Map<String, SanPham> products = warehouseProducts.get(warehouseCode);
 //            if (products != null) {
 //                products.remove(selectedProductCode);
 //                updateProductList(warehouseCode);
-//                System.out.println("Product deleted: " + selectedProductCode);
+//                System.out.println("SanPham deleted: " + selectedProductCode);
 //            }
 //        }
 //    }

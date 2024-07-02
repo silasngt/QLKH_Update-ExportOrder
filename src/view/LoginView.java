@@ -96,7 +96,7 @@ public class LoginView extends JFrame {
     private boolean authenticateUser(String username, String password) {
         // Thực hiện xác thực với cơ sở dữ liệu ở đây
         // Đây chỉ là một ví dụ đơn giản, bạn nên thay thế bằng logic xác thực thực tế
-        return username.equals("admin") && password.equals("password");
+        return username.equals("admin") && password.equals("123456");
     }
 
     private void openMainGUI() {

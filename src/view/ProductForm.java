@@ -1,10 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,129 +12,96 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class ProductForm extends JFrame {
+    
+    private JTextField Field_maHoaDon;
+    private JTextField Field_maSanPham;
+    private JTextField Field_tenSanPham;
+    private JTextField Field_soLuong;
+    private JTextField Field_gia;
+    private JButton Button_themSanPham;
+    private JButton Button_xacNhanDon;
+    private DefaultTableModel tableModel;
+    private JTable productTable;
 
-	 private JTextField Field_MaHoaDon;
-	 private JTextField Field_MaChiTietDonHang;
-	 private JTextField Field_MaSanPham;
-	 private JTextField Field_TenSanPham;
-	 private JTextField Field_SoLuong;
-	 private JTextField Field_Gia;
-	 private JTable productTable;
-	 private DefaultTableModel tableModel;
-	 private JButton Button_ThemSanPham;
-	 private JButton Button_XacNhanDon;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ProductForm frame = new ProductForm();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    public ProductForm() {
+        setTitle("Thêm sản phẩm vào hóa đơn");
+        setSize(800, 600);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-	/**
-	 * Create the frame.
-	 */
-	public  ProductForm() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		setTitle("Chi tiết hóa đơn");
-        getContentPane().setLayout(new BorderLayout());
+        JPanel formPanel = new JPanel(new GridLayout(6, 2));
+        Field_maHoaDon = new JTextField();
+        Field_maHoaDon.setEnabled(false);
+        Field_maSanPham = new JTextField();
+        Field_tenSanPham = new JTextField();
+        Field_soLuong = new JTextField();
+        Field_gia = new JTextField();
 
-        setSize(600, 400);
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        getContentPane().setLayout(new BorderLayout());
+        formPanel.add(new JLabel("Mã hóa đơn:"));
+        formPanel.add(Field_maHoaDon);
+        formPanel.add(new JLabel("Mã sản phẩm:"));
+        formPanel.add(Field_maSanPham);
+        formPanel.add(new JLabel("Tên sản phẩm:"));
+        formPanel.add(Field_tenSanPham);
+        formPanel.add(new JLabel("Số lượng:"));
+        formPanel.add(Field_soLuong);
+        formPanel.add(new JLabel("Giá:"));
+        formPanel.add(Field_gia);
 
-        JPanel panel = new JPanel(new GridLayout(7, 2));
-        panel.add(new JLabel("Mã hóa đơn:"));
-        Field_MaHoaDon = new JTextField();
-        Field_MaHoaDon.setEnabled(false);  // Make the Order ID field non-editable
-        panel.add(Field_MaHoaDon);
+        Button_themSanPham = new JButton("Thêm sản phẩm");
+        Button_xacNhanDon = new JButton("Xác nhận đơn hàng");
 
-        panel.add(new JLabel("Mã chi tiết đơn hàng:"));
-        Field_MaChiTietDonHang = new JTextField();
-        Field_MaChiTietDonHang.setEnabled(false);  // Make the Detail ID field non-editable
-        panel.add(Field_MaChiTietDonHang);
+        formPanel.add(Button_themSanPham);
+        formPanel.add(Button_xacNhanDon);
 
-        panel.add(new JLabel("Mã sản phẩm:"));
-        Field_MaSanPham = new JTextField();
-        panel.add(Field_MaSanPham);
+        tableModel = new DefaultTableModel();
+        tableModel.addColumn("Mã hóa đơn");
+        tableModel.addColumn("Mã chi tiết đơn hàng");
+        tableModel.addColumn("Mã sản phẩm");
+        tableModel.addColumn("Tên sản phẩm");
+        tableModel.addColumn("Số lượng");
+        tableModel.addColumn("Giá");
 
-        panel.add(new JLabel("Tên sản phẩm"));
-        Field_TenSanPham = new JTextField();
-        panel.add(Field_TenSanPham);
-
-        panel.add(new JLabel("Số lượng:"));
-        Field_SoLuong = new JTextField();
-        panel.add(Field_SoLuong);
-
-        panel.add(new JLabel("Price:"));
-        Field_Gia = new JTextField();
-        panel.add(Field_Gia);
-
-        Button_ThemSanPham = new JButton("Thêm sản phẩm");
-        panel.add(Button_ThemSanPham);
-
-        Button_XacNhanDon = new JButton("Xác nhận đơn hàng");
-        panel.add(Button_XacNhanDon);
-
-        getContentPane().add(panel, BorderLayout.NORTH);
-
-        tableModel = new DefaultTableModel(new Object[]{"Mã chi tiết đơn hàng", "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Giá"}, 0);
         productTable = new JTable(tableModel);
-        getContentPane().add(new JScrollPane(productTable), BorderLayout.CENTER);
+        JScrollPane tableScrollPane = new JScrollPane(productTable);
+
+        getContentPane().add(formPanel, BorderLayout.NORTH);
+        getContentPane().add(tableScrollPane, BorderLayout.CENTER);
     }
 
     public JTextField get_Field_maHoaDon() {
-        return Field_MaHoaDon;
-    }
-
-    public JTextField get_Field_maChiTietDonHang() {
-        return Field_MaChiTietDonHang;
+        return Field_maHoaDon;
     }
 
     public JTextField get_Field_maSanPham() {
-        return Field_MaSanPham;
+        return Field_maSanPham;
     }
 
     public JTextField get_Field_tenSanPham() {
-        return Field_TenSanPham;
+        return Field_tenSanPham;
     }
 
     public JTextField get_Field_soLuong() {
-        return Field_SoLuong;
+        return Field_soLuong;
     }
 
     public JTextField get_Field_gia() {
-        return Field_Gia;
+        return Field_gia;
     }
 
-    public JTable getBangSanPham() {
-        return productTable;
+    public JButton get_Button_themSanPham() {
+        return Button_themSanPham;
+    }
+
+    public JButton getButton_xacNhanDon() {
+        return Button_xacNhanDon;
     }
 
     public DefaultTableModel getTableModel() {
         return tableModel;
     }
 
-    public JButton get_Button_themSanPham() {
-        return Button_ThemSanPham;
-    }
-
-    public JButton getButton_xacNhanDon() {
-        return Button_XacNhanDon;
-    }
-
-    // Method to set the order details including detail ID
-    public void setChiTietHoaDon(String orderId, String detailId) {
-        this.Field_MaHoaDon.setText(orderId);
-        this.Field_MaChiTietDonHang.setText(detailId);
+    public void setChiTietHoaDon(String orderId, String chiTietId) {
+        Field_maHoaDon.setText(orderId);
+        // This method can be used to set other fields as needed
     }
 }
